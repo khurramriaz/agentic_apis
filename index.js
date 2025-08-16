@@ -6,4 +6,4 @@ async function run() {
     await connectDB();
 }
 
-run().catch(console.error);
+run().catch(console.error); 
