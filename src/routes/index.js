@@ -11,6 +11,7 @@ const { version } = require('mongoose');
  *                                  index route                                  *
  *********************************************************************************/
 Router.get('/', (req, res) => {
+  
   res.status(200).json(
     {
       version: pkg.version,
