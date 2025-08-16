@@ -14,6 +14,7 @@ Router.get('/', (req, res) => {
   res.status(200).json(
     {
       version: pkg.version,
+      status: "ok",
       now: `${moment().format('MMM DD, YYYY - HH:mm')}`
     });
 })
