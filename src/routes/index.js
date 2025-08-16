@@ -1,15 +1,21 @@
 const express       = require('express');
 const Router        = express.Router();
+const pkg           = require('../../package.json');
 
 // routes
 const moment = require('moment/moment');
+const { version } = require('mongoose');
 
 
 /*********************************************************************************
  *                                  index route                                  *
  *********************************************************************************/
 Router.get('/', (req, res) => {
-  res.status(200).send(`${moment().format('MMM DD, YYYY - HH:mm')}`);
+  res.status(200).json(
+    {
+      version: pkg.version,
+      now: `${moment().format('MMM DD, YYYY - HH:mm')}`
+    });
 })
 
 
