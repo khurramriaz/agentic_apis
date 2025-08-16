@@ -1,6 +1,4 @@
 {
     "schemaVersion": 2,
-    "dockerfileLines": [
-        "CMD [\"node\", \"index.js\"]"
-    ]
+    "templateId": "node/22"
 }
