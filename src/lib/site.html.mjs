@@ -18,6 +18,7 @@ export async function fetchHTML(url) {
             launcher: puppeteer,
             launchOptions: {
                 headless: true,
+                executablePath: '/usr/bin/chromium-browser',
                 args: [
                     '--no-sandbox',
                     '--disable-setuid-sandbox',
