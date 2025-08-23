@@ -13,45 +13,46 @@ import { computeExecutablePath } from '@puppeteer/browsers';
 puppeteer.use(StealthPlugin());
 
 export async function fetchHTML(url) {
-    let htmlContent = '';
+  let htmlContent = '';
 
-    // Prevent any storage on disk
-    const config = new Configuration({
-        persistStorage: false,  //  disables disk storage
-    });
+  // Prevent any storage on disk
+  const config = new Configuration({
+    persistStorage: false,  //  disables disk storage
+  });
 
-    const crawler = new PuppeteerCrawler({
-        launchContext: {
-            launcher: puppeteer,
-            launchOptions: {
-                headless: true,
-                executablePath:  '/usr/bin/google-chrome-stable', //'./chrome/win64-141.0.7368.0/chrome-win64/chrome.exe',
-                args: [
-                    '--no-sandbox',
-                    '--disable-setuid-sandbox',
-                    '--disable-dev-shm-usage',
-                ],
-            },
-        },
-        maxConcurrency: 1,
-        requestHandlerTimeoutSecs: 60,
+  const crawler = new PuppeteerCrawler({
+    launchContext: {
+      launcher: puppeteer,
+      launchOptions: {
+        headless: true,
+        executablePath: '/usr/bin/google-chrome-stable', //'./chrome/win64-141.0.7368.0/chrome-win64/chrome.exe',
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+        ],
+      },
+    },
+    maxConcurrency: 1,
+    requestHandlerTimeoutSecs: 60,
 
-        async requestHandler({ page, request }) {
-            await page.setViewport({
-                width: 1280,
-                height: 800,
-            });
+    async requestHandler({ page, request }) {
+      await page.setViewport({
+        width: 1280,
+        height: 800,
+      });
 
-            await page.goto(request.url, {  waitUntil: 'networkidle0', timeout: 60000  });
+      await page.goto(request.url, { waitUntil: 'networkidle0', timeout: 60000 });
 
-            // Get fully rendered HTML after JS execution
-            htmlContent = await page.content();
-        }
-    }, config);
+      // Get fully rendered HTML after JS execution
+      htmlContent = await page.content();
+    }
+  }, config);
 
-    await crawler.run([url]);
+  await crawler.run([url]);
 
-    return htmlContent;
+  return htmlContent;
 }
 
 
@@ -103,7 +104,7 @@ export function extractRSSContent(html, baseUrl = '') {
     if (href && !href.startsWith("http") && baseUrl) {
       try {
         href = new URL(href, baseUrl).href;
-      } catch (e) {}
+      } catch (e) { }
     }
     const key = `${text}|${href}`;
     if (text && href && !seenLinks.has(key)) {
@@ -112,10 +113,10 @@ export function extractRSSContent(html, baseUrl = '') {
     }
   });
 
-  return { 
-    headings: JSON.stringify(headings), 
-    spans, 
-    paragraphs, 
-    links: JSON.stringify(links) 
-};
+  return {
+    headings: JSON.stringify(headings),
+    spans,
+    paragraphs,
+    links: JSON.stringify(links)
+  };
 }
