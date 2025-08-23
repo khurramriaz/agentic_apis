@@ -5,7 +5,7 @@ const { initCron } = require('./src/bootstrap/cron');
 async function run() {
     initApp();
     await connectDB();
-    process.env.RUN_CRON && initCron();
+    process.env.RUN_CRON == 1 && initCron();
 }
 
 run().catch(console.error); 

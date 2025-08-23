@@ -2,13 +2,7 @@ import { PuppeteerCrawler, Configuration } from 'crawlee';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import * as cheerio from 'cheerio';
-import { computeExecutablePath } from '@puppeteer/browsers';
 
-// const executablePath = computeExecutablePath({
-//   browser: 'chrome',
-//   channel: 'latest',
-//   basePath: './.chrome',
-// });
 
 puppeteer.use(StealthPlugin());
 
@@ -25,7 +19,6 @@ export async function fetchHTML(url) {
       launcher: puppeteer,
       launchOptions: {
         headless: true,
-        //executablePath: '/usr/bin/google-chrome-stable', //'./chrome/win64-141.0.7368.0/chrome-win64/chrome.exe',
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',

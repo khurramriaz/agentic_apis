@@ -17,7 +17,7 @@ const generateFeeds = async () => {
       let respData = resp?.data;
 
       for (const feed of respData?.feeds) {
-         await Feeds.findOneAndUpdate({ link: feed.link }, { ...feed, base_url: site?.base_url}, { upsert: true });
+         await Feeds.findOneAndUpdate({ link: feed.link }, { ...feed, base_url: site?.base_url, category: site?.category}, { upsert: true });
       }
    }
 }
