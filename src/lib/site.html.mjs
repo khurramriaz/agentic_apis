@@ -25,7 +25,7 @@ export async function fetchHTML(url) {
       launcher: puppeteer,
       launchOptions: {
         headless: true,
-        executablePath: '/usr/bin/google-chrome-stable', //'./chrome/win64-141.0.7368.0/chrome-win64/chrome.exe',
+        //executablePath: '/usr/bin/google-chrome-stable', //'./chrome/win64-141.0.7368.0/chrome-win64/chrome.exe',
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
