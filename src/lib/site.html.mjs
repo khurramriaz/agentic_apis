@@ -50,7 +50,7 @@ export async function fetchHTML(url) {
 
 
 
-export function extractRSSContent(html, baseUrl = '') {
+export function extractBlogContent(html, baseUrl = '') {
   const $ = cheerio.load(html);
 
   const headings = [];
